@@ -55,14 +55,15 @@
     document.getElementById("footer_container").innerHTML = footer();
 
     async function getData(){
-
-        let res = await fetch("https://newsapi.org/v2/top-headlines?country=in&apiKey=2492c9eeebe84eb2905f23415989ea0a");
+        try{
+        let res = await fetch("https://newsapi.org/v2/top-headlines?country=in&pageSize=5&apiKey=2492c9eeebe84eb2905f23415989ea0a");
         let data = await res.json();
         append(data.articles);
-        // append(data.articles[2]);
-        // append(data.articles[3]);
-        
         console.log(data.articles);
+        }
+        catch(err){
+            console.log(err);
+        }
     }
 
     getData();
@@ -79,10 +80,65 @@
         div.append(image,p);
         container.append(div);            
         });
-
-
     }
 
+    async function getData2()
+    {
+        try{
+        let res = await fetch("https://newsapi.org/v2/everything?q=Politics&from=2022-06-17&sortBy=popularity&pageSize=5&apiKey=2492c9eeebe84eb2905f23415989ea0a");
+        let data = await res.json();
+        append2(data.articles);
+        console.log(data.articles);
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    getData2();
 
+    function append2(data){
+
+let container = document.getElementById("politics");
+data.forEach((ele) => {
+let image = document.createElement("img");
+image.src = ele.urlToImage;
+let p = document.createElement("p");
+p.innerText = ele.title;
+let div = document.createElement("div");
+div.append(image,p);
+container.append(div);            
+});
+}
+
+async function getData3()
+    {
+        try{
+        let res = await fetch("https://newsapi.org/v2/everything?q=Districts&from=2022-06-17&sortBy=popularity&pageSize=5&apiKey=2492c9eeebe84eb2905f23415989ea0a");
+        let data = await res.json();
+        append3(data.articles);
+        console.log(data.articles);
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    getData3();
+
+    function append3(data){
+
+let container = document.getElementById("districts");
+data.forEach((ele) => {
+let image = document.createElement("img");
+image.src = ele.urlToImage;
+let p = document.createElement("p");
+p.innerText = ele.title;
+let div = document.createElement("div");
+div.append(image,p);
+container.append(div);            
+});
+}
+
+
+    
 </script>
 
