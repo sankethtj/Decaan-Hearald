@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./style/navbar.css"/>
+    <link rel="stylesheet" href="./style/footer.css"/>
+    <link rel="stylesheet" href="./style/index.css"/>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/fontawesome.min.css"/>
+    <script src="https://kit.fontawesome.com/1a4457afd9.js" crossorigin="anonymous"></script>
+    <title>News: Latest & Breaking News, Latest News Headlines|Deccan Herald|deccanhearld.com</title>
+</head>
+<body>
+
+    <div id="navbar_complete"></div>
+
+    <!-- Search Bar -->
+    <div id="search">
+        <input id="search_input" type="text" placeholder="Search...">
+        <button onclick="search()">Search >></button>
+    </div>
+
+    
+    <h3>Top Stories</h3>
+    <div id="top_storiescontainer"></div>
+
+    <div id="politics">
+        <h3>Politics</h3>
+
+
+    </div>
+
+    <div id="districts">
+        <h3>Districts</h3>
+
+    </div>
+
+
+
+
+
+    <div id="footer_container"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+</body>
+</html>
+
+<script type="module">
+    import navbar from "./components/navbar.js";
+    document.getElementById("navbar_complete").innerHTML = navbar();
+    import footer from "./components/footer.js";
+    document.getElementById("footer_container").innerHTML = footer();
+
+    async function getData(){
+
+        let res = await fetch("https://newsapi.org/v2/top-headlines?country=in&apiKey=2492c9eeebe84eb2905f23415989ea0a");
+        let data = await res.json();
+        append(data.articles);
+        // append(data.articles[2]);
+        // append(data.articles[3]);
+        
+        console.log(data.articles);
+    }
+
+    getData();
+
+    function append(data){
+
+        let container = document.getElementById("top_storiescontainer");
+        data.forEach((ele) => {
+        let image = document.createElement("img");
+        image.src = ele.urlToImage;
+        let p = document.createElement("p");
+        p.innerText = ele.title;
+        let div = document.createElement("div");
+        div.append(image,p);
+        container.append(div);            
+        });
+
+
+    }
+
+
+</script>
+

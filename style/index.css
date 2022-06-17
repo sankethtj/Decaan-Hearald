@@ -1,0 +1,10 @@
+#top_storiescontainer{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 20%;
+}
+
+#top_storiescontainer>div{
+    height: 50px;
+    width: 50px;
+}
